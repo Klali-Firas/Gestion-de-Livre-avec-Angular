@@ -1,0 +1,37 @@
+<h1>Application de gestion de livres</h1><br>
+<button class="btn btn-success mx-3 mb-3" (click)="changeVisib()">{{visib?"Terminer":"Ajouter un Livre"}}</button><br>
+
+<div class="p-3" *ngIf="visib">
+<label for="titre">Titre</label><br>
+<input type="text" id="titre" class="form-control" [(ngModel)]="titre"><br>
+<label for="Auteur">Auteur</label><br>
+<input type="text" id="Auteur" class="form-control" [(ngModel)]="auteur"><br>
+<label for="Prix">Prix</label><br>
+<input type="text" id="Prix" class="form-control" [(ngModel)]="prix"><br>
+<button class="btn btn-primary" (click)="addLivre()"> Ajouter</button>
+</div>
+
+
+<table class="table table-striped m-3">
+  <thead class="table-dark">
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Titre</th>
+    <th scope="col">Auteur</th>
+    <th scope="col">Prix</th>
+    <th scope="col">Editer</th>
+    <th scope="col">Supprimer</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let b of books">
+    <th scope="row">{{b.id}}</th>
+    <td> <input type="text" [(ngModel)]="b.titre" class="form-control" [disabled]="b.id!=disabledID" [ngClass]="{'border-0 bg-transparent': b.id!=disabledID}">  </td>
+    <td> <input type="text" [(ngModel)]="b.auteur " class="form-control" [disabled]="b.id!=disabledID" [ngClass]="{'border-0 bg-transparent': b.id!=disabledID}"> </td>
+    <td> <input type="text" [(ngModel)]="b.prix" class="form-control" [disabled]="b.id!=disabledID" [ngClass]="{'border-0 bg-transparent': b.id!=disabledID}"> </td>
+    <td> <button class="btn btn-primary" (click)="editerLivre(b.id)">{{(isEditingForReal(b.id))?"Confirmer":"Editer"}}</button> </td>
+    <td> <button class="btn btn-danger" (click)="deleteLivre(b.id)">Supprimer</button> </td>
+
+  </tr>
+  </tbody>
+</table>
