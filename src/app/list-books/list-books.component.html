@@ -1,16 +1,6 @@
 <h1>Application de gestion de livres</h1><br>
-<button class="btn btn-success mx-3 mb-3" (click)="changeVisib()">{{visib?"Terminer":"Ajouter un Livre"}}</button><br>
 
-<div class="p-3" *ngIf="visib">
-<label for="titre">Titre</label><br>
-<input type="text" id="titre" class="form-control" [(ngModel)]="titre"><br>
-<label for="Auteur">Auteur</label><br>
-<input type="text" id="Auteur" class="form-control" [(ngModel)]="auteur"><br>
-<label for="Prix">Prix</label><br>
-<input type="text" id="Prix" class="form-control" [(ngModel)]="prix"><br>
-<button class="btn btn-primary" (click)="addLivre()"> Ajouter</button>
-</div>
-
+<app-search (filter)="filterBooks($event)"></app-search>
 
 <table class="table table-striped m-3">
   <thead class="table-dark">
@@ -24,7 +14,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let b of books">
+  <tr *ngFor="let b of filteredBooks">
     <th scope="row">{{b.id}}</th>
     <td> <input type="text" [(ngModel)]="b.titre" class="form-control" [disabled]="b.id!=disabledID" [ngClass]="{'border-0 bg-transparent': b.id!=disabledID}">  </td>
     <td> <input type="text" [(ngModel)]="b.auteur " class="form-control" [disabled]="b.id!=disabledID" [ngClass]="{'border-0 bg-transparent': b.id!=disabledID}"> </td>
@@ -35,3 +25,15 @@
   </tr>
   </tbody>
 </table>
+
+<button class="btn btn-success mx-3 mb-3" (click)="changeVisib()">{{visib?"Terminer":"Ajouter un Livre"}}</button><br>
+
+<div class="p-3" *ngIf="visib">
+<label for="titre">Titre</label><br>
+<input type="text" id="titre" class="form-control" [(ngModel)]="titre"><br>
+<label for="Auteur">Auteur</label><br>
+<input type="text" id="Auteur" class="form-control" [(ngModel)]="auteur"><br>
+<label for="Prix">Prix</label><br>
+<input type="text" id="Prix" class="form-control" [(ngModel)]="prix"><br>
+<button class="btn btn-primary" (click)="addLivre()"> Ajouter</button>
+</div>

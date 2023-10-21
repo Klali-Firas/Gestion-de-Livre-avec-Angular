@@ -24,9 +24,11 @@ export class ListBooksComponent {
     this.titre = "";
     this.auteur = "";
     this.prix = "";
+    this.filterBooks(this.filterText);
   }
   deleteLivre(id: Number) {
     this.books = this.books.filter(book => book.id != id);
+    this.filterBooks(this.filterText);
   }
   disabledID = 0;
   isEditing = false;
@@ -43,8 +45,15 @@ export class ListBooksComponent {
         this.disabledID = 0;
         this.isEditing = false;
       }
+      this.filterBooks(this.filterText);
     }
   } isEditingForReal(id: number) {
     return this.isEditing && id == this.disabledID;
+  }
+  filteredBooks = this.books;
+  filterText: string = "";
+  filterBooks(filter: string) {
+    this.filterText = filter;
+    this.filteredBooks = this.books.filter(b => b.titre.includes(filter));
   }
 }
